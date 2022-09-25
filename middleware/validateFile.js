@@ -1,0 +1,1 @@
+const validateFile = req.file;
