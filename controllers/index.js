@@ -1,5 +1,12 @@
-const e = require("express");
 const Users = require("../models/Users");
+const renderAlert = require("../components/components");
+
+// const renderAlert = (title, res) => {
+//   res.render("partials/alert", {
+//     layout: "./layout/main",
+//     title,
+//   });
+// };
 
 const getAllUsers = async (req, res) => {
   const result = await Users.findAll({});
@@ -22,7 +29,8 @@ const addUser = async (req, res) => {
       image,
     });
     if (!result) res.json({ msg: "Gagal membuat data" });
-    res.json({ msg: "Berikut membuat data", result });
+    // res.json({ msg: "Berikut membuat data", result });
+    renderAlert("Berhasil Menambah Data", res);
   }
 };
 
@@ -42,8 +50,24 @@ const deleteUser = async (req, res) => {
 
 const editUser = async (req, res) => {
   const id = req.params.id;
-  const image = req.file.path;
-  // const result
+  const { name, email } = req.body;
+  if (name <= 0 || email <= 0) {
+    res.json({ msg: "Harap isi data dengan benar" });
+  } else if (!req.file) {
+    res.json({ msg: "Harap upload gambar anda" });
+  } else {
+    const image = req.file.path;
+    const result = await Users.update(
+      {
+        name,
+        email,
+        image,
+      },
+      { where: { id: id } }
+    );
+    if (!result) res.json({ msg: "Gagal edit data" });
+    res.json({ msg: "Berhasil edit data !" });
+  }
 };
 
-module.exports = { getAllUsers, addUser, deleteUser };
+module.exports = { getAllUsers, addUser, deleteUser, editUser };
