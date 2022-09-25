@@ -1,18 +1,15 @@
 const Users = require("../models/Users");
-const renderAlert = require("../components/components");
-
-// const renderAlert = (title, res) => {
-//   res.render("partials/alert", {
-//     layout: "./layout/main",
-//     title,
-//   });
-// };
+const { renderAlert, renderAllUsers, renderAddUser } = require("../components/components");
 
 const getAllUsers = async (req, res) => {
   const result = await Users.findAll({});
-  if (result <= 0) res.json({ msg: "Data belum tersedia" });
-  if (!result) res.json({ msg: "Gagal mengambil data" });
-  res.json({ msg: "Berikut data yang tersedia", result });
+  if (result <= 0) {
+    renderAllUsers("", res, "Belum ada data user", result, 1, "warning", "Belum ada data", "");
+  } else if (!result) {
+    renderAllUsers("", res, "Gagal mendapatkan data user", result, 1, "", "Gagal mendapatkan data user", "");
+  } else {
+    renderAllUsers("", res, "Semua Data User", result, 0, "", "", "");
+  }
 };
 
 const addUser = async (req, res) => {
@@ -28,9 +25,8 @@ const addUser = async (req, res) => {
       email,
       image,
     });
-    if (!result) res.json({ msg: "Gagal membuat data" });
-    // res.json({ msg: "Berikut membuat data", result });
-    renderAlert("Berhasil Menambah Data", res);
+    if (!result) renderAlert("", res, "Gagal menambahkan data", "danger", "Gagal menambahkan data");
+    renderAddUser("", res, "Berhasil add data", 1, "success", "Berhasil menambahkan data", 1);
   }
 };
 
@@ -43,7 +39,7 @@ const deleteUser = async (req, res) => {
     if (!result) {
       res.json({ msg: "Data tidak ditemukan" });
     } else {
-      res.json({ msg: "Data berhasil dihapus" });
+      res.redirect("/getusers");
     }
   }
 };

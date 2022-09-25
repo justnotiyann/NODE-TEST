@@ -1,0 +1,47 @@
+<div class="container" style="margin-top: 2em;">
+  <div class="row">
+    <div class="">
+      <h1 class="fw-bold ">Halaman Semua Data User</h1>
+      <table class="table mt-2">
+        <thead>
+          <tr>
+            <th scope="col">NO</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Email</th>
+            <th scope="col">Gambar</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (jika=1) { %>
+            <%- include('../partials/alert') %>
+              <% } %>
+                <% result.forEach(datas=> { %>
+                  <tr>
+                    <th scope="row">
+                      <%= datas.id %>
+                    </th>
+                    <td>
+                      <%= datas.name %>
+                    </td>
+                    <td>
+                      <%= datas.email %>
+                    </td>
+                    <td>
+                      <a href="/<%=datas.image.slice(4) %>">Lihat Gambar</a>
+                    </td>
+                    <td>
+                      <a href="/delete/<%= datas.id %>">
+                        <button class="btn btn-danger" onclick="confirm('Anda Yakien ?')">Hapus Data</button>
+                      </a>
+                      <a href="/edit/<%= datas.id %>">
+                        <button class="btn btn-warning">Edit Data</button>
+                      </a>
+                    </td>
+                  </tr>
+                  <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

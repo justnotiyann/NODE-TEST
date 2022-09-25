@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2" style="margin-top: 5em;">
+            <% if (jika=1) { %>
+                <%- include('../partials/alert') %>
+                    <% } %>
+                        <h2 class="fw-bold">Form Pendaftaran </h2>
+                        <form action="/" method="post" enctype="multipart/form-data">
+                            <label for="name" class="form-label">Masukkan Nama</label>
+                            <input required type="text" name="name" id="email" class="form-control">
+                            <label for="email" class="form-label">Masukkan Email</label>
+                            <input required type="email" name="email" id="email" class="form-control">
+                            <label for="image" class="form-label">Masukkan Gambar</label>
+                            <input required type="file" name="image" id="image" class="form-control">
+                            <button class="btn btn-success mt-4 w-50">Submit !</button>
+                        </form>
+        </div>
+    </div>
+</div>
