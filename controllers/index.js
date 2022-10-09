@@ -39,7 +39,7 @@ const deleteUser = async (req, res) => {
     if (!result) {
       res.json({ msg: "Data tidak ditemukan" });
     } else {
-      res.redirect("/getusers");
+      res.redirect("/EJSMULTER/getusers");
     }
   }
 };
