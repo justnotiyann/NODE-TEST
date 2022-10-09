@@ -13,33 +13,34 @@
           </tr>
         </thead>
         <tbody>
-          <% if (jika=1) { %>
-            <%- include('../partials/alert') %>
-              <% } %>
-                <% result.forEach(datas=> { %>
-                  <tr>
-                    <th scope="row">
-                      <%= datas.id %>
-                    </th>
-                    <td>
-                      <%= datas.name %>
-                    </td>
-                    <td>
-                      <%= datas.email %>
-                    </td>
-                    <td>
-                      <a href="/<%=datas.image.slice(4) %>">Lihat Gambar</a>
-                    </td>
-                    <td>
-                      <a href="/delete/<%= datas.id %>">
-                        <button class="btn btn-danger" onclick="confirm('Anda Yakien ?')">Hapus Data</button>
-                      </a>
-                      <a href="/edit/<%= datas.id %>">
-                        <button class="btn btn-warning">Edit Data</button>
-                      </a>
-                    </td>
-                  </tr>
-                  <% }) %>
+          <% nomor=1 %>
+            <% if (jika=1) { %>
+              <%- include('../partials/alert') %>
+                <% } %>
+                  <% result.forEach(datas=> { %>
+                    <tr>
+                      <th scope="row">
+                        <%= nomor++ %>
+                      </th>
+                      <td>
+                        <%= datas.name %>
+                      </td>
+                      <td>
+                        <%= datas.email %>
+                      </td>
+                      <td>
+                        <a href="/<%=datas.image.slice(4) %>">Lihat Gambar</a>
+                      </td>
+                      <td>
+                        <a href="/delete/<%= datas.id %>">
+                          <button class="btn btn-danger" onclick="confirm('Anda Yakien ?')">Hapus Data</button>
+                        </a>
+                        <a href="/edit/<%= datas.id %>">
+                          <button class="btn btn-warning">Edit Data</button>
+                        </a>
+                      </td>
+                    </tr>
+                    <% }) %>
         </tbody>
       </table>
     </div>
